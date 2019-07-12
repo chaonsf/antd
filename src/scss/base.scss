@@ -1,0 +1,10 @@
+@mixin px2rem($prop,$num){
+    #{$prop}:$num;
+   [data-dpr="2"] & {
+       #{$prop}: $num * 2;
+   }
+
+   [data-dpr="3"] & {
+       #{$prop}:$num * 3;
+   }
+}

@@ -1,0 +1,15 @@
+[{
+    "key":"treat",
+    "name":"",
+    "abbr":"treat",
+    "before_render":[],
+    "output":{
+        "content_type": "html", 
+        "redirect_url": "",
+        "html": "~/Template/html/treat/index.html",
+        "root": "",
+        "has_cache": false,
+        "has_validate": false,
+        "output_keys": [ ]
+    }
+}]

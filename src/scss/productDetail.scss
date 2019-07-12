@@ -1,0 +1,25 @@
+@import './base.scss';
+.CONTAINER{
+    img{
+        width:100%;
+    }
+    .pdpd_info{
+        position: relative;
+        .Pd_detail{
+            position: absolute;
+            background: rgba(0, 0, 0, 0.5);
+            @include px2rem(width,45px);
+            @include px2rem(height,45px);
+            color: #fff;
+            @include px2rem(padding,10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            @include px2rem(font-size,12px);
+            @include px2rem(bottom,30px);
+            @include px2rem(right,20px);
+
+        }
+    }
+}
