@@ -1,4 +1,7 @@
 @import './base.scss';
+.dn{
+    display: none
+}
 .chatRoot{
     display: flex;
     flex-flow: column nowrap;
@@ -143,6 +146,10 @@
             @include px2rem(font-size,12px);
             color: #3B9EF7;
             margin-bottom: 10px;
+        }
+        .bottomMessage{
+            @include px2rem (padding-bottom,10px);
+            border-bottom: 1px solid #999;
         }
     }
     .foot{
