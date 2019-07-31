@@ -231,7 +231,7 @@ class ProductDetail extends Component{
                     </div>
                     <div className="bottom_btn_bg weui-flex">
                           <div className="weui-flex__item bottom_btn_left" onClick={this.share.bind(this)}>分享</div>
-                          <div className="weui-flex__item back">返回</div>
+                          <div className="weui-flex__item back" onClick={()=>this.props.back()}>返回</div>
                     </div>
                     <Drawer width="100%" height="100%" visible={this.state.visible} className="zmage" closable={false} onClick={this.shareDrawer.bind(this)} placement="left">
                         <img src={this.state.href} />
