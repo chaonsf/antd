@@ -135,9 +135,14 @@
 
         }
         .message{
-            justify-content: center;
-            display:flex;
+            text-align: center;
             color:#999;
+        }
+        .more{
+            text-align: center;
+            @include px2rem(font-size,12px);
+            color: #3B9EF7;
+            margin-bottom: 10px;
         }
     }
     .foot{

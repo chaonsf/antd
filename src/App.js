@@ -2,7 +2,6 @@ import React,{ Component,Fragment } from 'react';
 import { Drawer } from 'antd';
 import './scss/chat.scss';
 import Chat from './pages/chatroom'
-import productDetail from './pages/productDetail';
 import server from './services/extendApi.js';
 import ProductDetail from './pages/productDetail';
 let api=new server()
@@ -12,19 +11,21 @@ class App extends Component {
        this.state={
           chatroom:true, //聊天室开关
           className:"chatIndex", // 聊天室的大class
-          chatZIndex:1000,
+          chatZIndex:10,
           productDetail:false,//产品详情开关
           productDetailclass:"purchase",
           productDetailZIndex:1,
+          zIndex:10,
          
        }
    }
   componentDidMount(){
   }
   productDetail(){
+    let zIndex=this.state.zIndex
       this.setState({
-          chatZIndex:1,
-          productDetailZIndex:1000,
+          productDetailZIndex:zIndex+1,
+          zIndex:zIndex+1,
           productDetail:true
       })
   }

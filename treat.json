@@ -2,7 +2,17 @@
     "key":"treat",
     "name":"",
     "abbr":"treat",
-    "before_render":[],
+    "before_render":[
+        {
+            "render_key": "v",
+            "call_func": {
+              "dll_name": "NORMAL_CHAT",
+              "cls_name": "",
+              "func_name": "parse_scene",
+                "user_type":"MEMBER"
+            }
+          }
+    ],
     "output":{
         "content_type": "html", 
         "redirect_url": "",

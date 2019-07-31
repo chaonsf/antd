@@ -17,7 +17,8 @@ class Chat extends Component{
                arrow:{} ,//箭头样式
                sendcontent:"",// 输入框值
                tipsHtml:"",//智能提示html
-               st:0,   
+               st:0,
+               history:false,//控制是否有更多历史消息
            }
        }
        componentDidMount(){
@@ -28,7 +29,7 @@ class Chat extends Component{
        }
        load(){
           let obj={
-               USER_TYPE:"INQU_MEMBER"   //toB这个参数为CHANNEL
+               user_type:"MEMBER"   //toB这个参数为CHANNEL
            }
           api.sendPost("../post_chat/welcome",obj).then(res=>{
                 let data=res.data;
@@ -50,6 +51,11 @@ class Chat extends Component{
                 this.setState({
                       headImg:title
                 })
+                if(data[0].has_chat_history=="Y"){
+                     this.setState({
+                          history:true
+                     })
+                }
                 let newTrans=new trans(data);
                 let html=newTrans.chat();
                 let $dom=document.getElementsByClassName("chat")[0];
@@ -62,7 +68,7 @@ class Chat extends Component{
           })
        }
        intelliSense(){  //加载智能感知数据
-          let obj={ USER_TYPE:"INQU_MEMBER" };
+          let obj={ user_type:"MEMBER" };
            api.sendPost("../post_chat/download_suggest",obj).then(res=>{
                   this.setState({
                     intelliSenseData:res.data
@@ -115,7 +121,7 @@ class Chat extends Component{
                    sendcontent:"",
                    tipsHtml:""
                })
-               let obj={"question":value, USER_TYPE:"INQU_MEMBER" };
+               let obj={"question":value, user_type:"MEMBER" };
                this.reply(obj)
            }else{
                message.error("请先输入内容")
@@ -163,7 +169,12 @@ class Chat extends Component{
                                let value=$link[j].getAttribute("data-val");
                               let a=$link[j].getElementsByTagName("a")[0];
                               let text=a.innerHTML;
-                              that.select(value,text)
+                              if(value){
+                                   that.select(value,text) 
+                              }else{
+                                   that.select(text,text)    
+                              }
+                              
                           }
                     }
                  }(i))
@@ -182,7 +193,12 @@ class Chat extends Component{
           }
        }
        select(value,text){
-          let obj={"value":value, USER_TYPE:"INQU_MEMBER" }
+           let obj;
+           if(value==text){
+               obj={"question":value, user_type:"MEMBER" }
+           }else{
+               obj={"value":value, user_type:"MEMBER" } 
+           }
           let stext="您已选择了 【"+text+"】";
           this.right(stext);
           this.reply(obj);
@@ -260,6 +276,9 @@ class Chat extends Component{
             let aa='this.scrollToBottom()';
              eval(aa)
        }
+       dealHistory(){
+            console.log("加载更多")
+       }
        render(){
             const bg={
                backgroundImage:`url(${require("../image/xiangxiajiantou.png")})`,
@@ -268,6 +287,7 @@ class Chat extends Component{
                 <div className='chatRoot'>
                      <div className="chat_title" dangerouslySetInnerHTML={{__html:this.state.headImg}}></div>
                      <div className='chat' ref='chat' onScroll={this.scroll.bind(this)}>
+                          {this.state.history?(<div className='more' onClick={this.dealHistory.bind(this)}>查看更多消息</div>):(<Fragment></Fragment>)}
                           <ul className='item' ref="ul"></ul>
                      </div>
                      <div className='tips' style={this.state.tips}>

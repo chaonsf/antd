@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './scss/public.scss';
+import './public/flexible';
+import './scss/weui.min.css';
 import * as serviceWorker from './serviceWorker';
 import Router from './router'
 
